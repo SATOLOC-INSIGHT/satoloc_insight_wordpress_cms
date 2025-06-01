@@ -1,0 +1,1 @@
+# satoloc_insight_wordpress_cms
