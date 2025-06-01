@@ -1,0 +1,74 @@
+version: "3.8"
+
+services:
+  # WordPress Database
+  wordpress_db:
+    image: mysql:8.0
+    container_name: satoloc_wordpress_db
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: satoloc_wordpress
+      MYSQL_USER: satoloc_wp_user
+      MYSQL_PASSWORD: satoloc_wp_password
+      MYSQL_ROOT_PASSWORD: satoloc_root_password
+    volumes:
+      - wordpress_db_data:/var/lib/mysql
+    ports:
+      - "3307:3306"
+    networks:
+      - wordpress_network
+
+  # WordPress Application
+  wordpress:
+    image: wordpress:6.4-apache
+    container_name: satoloc_wordpress
+    restart: unless-stopped
+    depends_on:
+      - wordpress_db
+    environment:
+      WORDPRESS_DB_HOST: wordpress_db:3306
+      WORDPRESS_DB_NAME: satoloc_wordpress
+      WORDPRESS_DB_USER: satoloc_wp_user
+      WORDPRESS_DB_PASSWORD: satoloc_wp_password
+      WORDPRESS_CONFIG_EXTRA: |
+        # Enable WordPress REST API
+        define('WP_DEBUG', true);
+        define('WP_DEBUG_LOG', true);
+        define('WP_DEBUG_DISPLAY', false);
+
+        # CORS headers for REST API
+        define('REST_ENABLE_CORS', true);
+
+        # Allow custom REST API endpoints
+        define('REST_REQUEST_PARAMETER', 'rest_route');
+    volumes:
+      - ./wordpress-data:/var/www/html
+    ports:
+      - "8080:80"
+    networks:
+      - wordpress_network
+
+  # phpMyAdmin for database management
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    container_name: satoloc_phpmyadmin
+    restart: unless-stopped
+    depends_on:
+      - wordpress_db
+    environment:
+      PMA_HOST: wordpress_db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: satoloc_root_password
+    ports:
+      - "8081:80"
+    networks:
+      - wordpress_network
+
+volumes:
+  wordpress_db_data:
+    driver: local
+
+networks:
+  wordpress_network:
+    driver: bridge

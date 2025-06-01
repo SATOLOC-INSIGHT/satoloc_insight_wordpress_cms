@@ -1,0 +1,122 @@
+# WordPress Core
+# Don't track WordPress core files if they get generated
+wp-admin/
+wp-includes/
+wp-content/index.php
+wp-content/languages/
+wp-content/upgrade/
+
+# WordPress Database
+wordpress-data/mysql/
+wordpress-data/db/
+wordpress-data/database/
+*.sql
+*.sql.gz
+
+# WordPress Uploads and Generated Content
+wordpress-data/wp-content/uploads/
+wordpress-data/wp-content/cache/
+wordpress-data/wp-content/backup-db/
+wordpress-data/wp-content/advanced-cache.php
+wordpress-data/wp-content/wp-cache-config.php
+wordpress-data/wp-content/cache/
+wordpress-data/wp-content/backups/
+
+# WordPress Config
+wp-config.php
+wp-config-local.php
+.htaccess
+
+# Environment Files
+.env
+.env.local
+.env.production
+.env.staging
+.env.development
+
+# Docker
+.docker/
+docker-compose.override.yml
+.dockerignore
+
+# Logs
+*.log
+logs/
+wordpress-data/logs/
+mysql-logs/
+apache-logs/
+nginx-logs/
+
+# OS Generated Files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDE and Editor Files
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.sublime-project
+.sublime-workspace
+
+# Node.js (if using any WordPress build tools)
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Backup Files
+*.bak
+*.backup
+*.old
+
+# Temporary Files
+tmp/
+temp/
+*.tmp
+*.temp
+
+# WordPress Plugin/Theme Development
+*.zip
+*.tar.gz
+
+# Security Keys and Salts (if stored separately)
+salt.txt
+keys.txt
+
+# PHPMyAdmin
+phpmyadmin/tmp/
+phpmyadmin/config.inc.php
+
+# WordPress Multisite
+wp-content/blogs.dir/
+
+# WordPress CLI
+wp-cli.yml
+
+# Composer (if using for WordPress)
+vendor/
+composer.lock
+
+# WordPress Updates
+wordpress-data/wp-content/upgrade/
+wordpress-data/wp-content/updates/
+
+# Error logs specifically
+error_log
+debug.log
+
+# Keep important structure files
+!README.md
+!WORDPRESS_SETUP.md
+!docker-compose.wordpress.yml
+!scripts/
+!scripts/*.sh 
