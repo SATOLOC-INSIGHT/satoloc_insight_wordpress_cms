@@ -39,6 +39,8 @@ function get_homepage_content($request) {
     $award_section = get_field('award_section', $homepage_page->ID);
     $roadmap = get_field('roadmap', $homepage_page->ID);
     $pricing = get_field('pricing', $homepage_page->ID);
+    $pricing_title = get_field('pricing_title', $homepage_page->ID);
+    $pricing_description = get_field('pricing_description', $homepage_page->ID);
     $main_faq = get_field('main_faq', $homepage_page->ID);
     $auto_lqa = get_field('auto_lqa', $homepage_page->ID);
 
@@ -203,8 +205,8 @@ function get_homepage_content($request) {
             'description' => $roadmap['description'] ?? null
         ),
         'pricing' => array(
-            'title' => $pricing['pricing_title'] ?? null,
-            'description' => $pricing['pricing_description'] ?? null,
+            'title' => $pricing_title ?? null,
+            'description' => $pricing_description ?? null,
             'plans' => $pricing_plans
         ),
         'auto_lqa' => array(
