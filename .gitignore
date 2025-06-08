@@ -89,4 +89,4 @@ composer.lock
 # Keep project documentation and configs
 !/README.md
 !/WORDPRESS_SETUP.md
-!/docker-compose.wordpress.yml 
+!/docker-compose.wordpress.yml wp-config.php
