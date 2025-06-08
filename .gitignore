@@ -89,4 +89,8 @@ composer.lock
 # Keep project documentation and configs
 !/README.md
 !/WORDPRESS_SETUP.md
-!/docker-compose.wordpress.yml wp-config.php
+!/docker-compose.wordpress.yml
+
+# Deployment Configuration
+# wp-config.php is environment-specific and should be managed manually on production
+# This ensures it won't be overwritten during automatic deployments
