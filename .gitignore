@@ -9,6 +9,7 @@
 # /xmlrpc.php
 
 # WordPress Configuration
+wp-config.php                # Main config file - environment specific
 wp-config-sample.php
 wp-config-docker.php
 
