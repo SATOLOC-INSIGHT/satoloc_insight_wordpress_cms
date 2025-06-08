@@ -24,9 +24,21 @@ add_action('rest_api_init', 'register_routes');
 
 // Function to get homepage content
 function get_homepage_content($request) {
-    // Get the Homepage page (ID 25) - this is a regular WordPress page
-    // with the "HomePage" ACF field group assigned to it
-    $homepage_page = get_post(25);
+    // Get the Homepage page by slug - this is more reliable than hardcoded ID
+    $homepage_page = get_page_by_path('homepage');
+    
+    // Fallback: if not found by slug, try to find by title
+    if (!$homepage_page) {
+        $pages = get_posts(array(
+            'post_type' => 'page',
+            'post_status' => 'publish',
+            'title' => 'Homepage',
+            'numberposts' => 1
+        ));
+        if (!empty($pages)) {
+            $homepage_page = $pages[0];
+        }
+    }
 
     if (!$homepage_page || $homepage_page->post_status !== 'publish') {
         return new WP_Error('no_content', 'Homepage not found or not published', array('status' => 404));
