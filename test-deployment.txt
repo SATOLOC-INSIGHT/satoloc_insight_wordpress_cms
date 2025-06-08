@@ -1,0 +1,16 @@
+## WordPress CMS Automated Deployment Test
+
+This file was created to test the automated deployment pipeline.
+
+- Created: June 8, 2025
+- Purpose: Verify GitHub → Hostinger auto-deployment
+- Status: Testing automated sync
+
+If you see this file on your production server at cms.satolocinsight.com, 
+then the automated deployment is working perfectly! 🚀
+
+Next steps after successful deployment:
+1. Remove this test file
+2. Configure WordPress for headless CMS
+3. Set up API endpoints for Next.js frontend
+4. Test REST API functionality 
