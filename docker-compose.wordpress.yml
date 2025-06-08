@@ -42,7 +42,7 @@ services:
         # Allow custom REST API endpoints
         define('REST_REQUEST_PARAMETER', 'rest_route');
     volumes:
-      - ./wordpress-data:/var/www/html
+      - .:/var/www/html
     ports:
       - "8080:80"
     networks:
