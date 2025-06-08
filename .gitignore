@@ -1,53 +1,39 @@
-# WordPress Core
-# Don't track WordPress core files if they get generated
-wp-admin/
-wp-includes/
-wp-content/index.php
-wp-content/languages/
-wp-content/upgrade/
+# WordPress Core Files (Optional - you can choose to track these or not)
+# Uncomment the following lines if you want to exclude WordPress core files
+# /wp-admin/
+# /wp-includes/
+# /wp-*.php
+# /index.php
+# /license.txt
+# /readme.html
+# /xmlrpc.php
 
-# WordPress Database
-wordpress-data/mysql/
-wordpress-data/db/
-wordpress-data/database/
-*.sql
-*.sql.gz
+# WordPress Configuration
+wp-config-sample.php
+wp-config-docker.php
 
-# WordPress Uploads and Generated Content
-wordpress-data/wp-content/uploads/
-wordpress-data/wp-content/cache/
-wordpress-data/wp-content/backup-db/
-wordpress-data/wp-content/advanced-cache.php
-wordpress-data/wp-content/wp-cache-config.php
-wordpress-data/wp-content/cache/
-wordpress-data/wp-content/backups/
+# WordPress Content - Uploads (User uploaded files)
+/wp-content/uploads/
+/wp-content/upgrade/
+/wp-content/backup-db/
+/wp-content/advanced-cache.php
+/wp-content/wp-cache-config.php
+/wp-content/cache/
+/wp-content/backups/
 
-# WordPress Config
-wp-config.php
-wp-config-local.php
-.htaccess
-
-# Environment Files
-.env
-.env.local
-.env.production
-.env.staging
-.env.development
-
-# Docker
-.docker/
-docker-compose.override.yml
-.dockerignore
-
-# Logs
+# WordPress Cache and Logs
 *.log
-logs/
-wordpress-data/logs/
-mysql-logs/
-apache-logs/
-nginx-logs/
+/wp-content/debug.log
+/wp-content/error_log
 
-# OS Generated Files
+# Plugins to ignore (if using Composer or specific deployment)
+# /wp-content/plugins/akismet/
+# /wp-content/plugins/hello.php
+
+# Themes to ignore (default themes)
+/wp-content/themes/twenty*/
+
+# Operating System Files
 .DS_Store
 .DS_Store?
 ._*
@@ -56,67 +42,50 @@ nginx-logs/
 ehthumbs.db
 Thumbs.db
 
+# Development Tools
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Docker Development (local only)
+wordpress-data/
+wp-data/
+wp-files/
+
 # IDE and Editor Files
 .vscode/
 .idea/
 *.swp
 *.swo
 *~
-.sublime-project
-.sublime-workspace
-
-# Node.js (if using any WordPress build tools)
-node_modules/
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-package-lock.json
-yarn.lock
-
-# Backup Files
-*.bak
-*.backup
-*.old
 
 # Temporary Files
-tmp/
-temp/
 *.tmp
 *.temp
 
-# WordPress Plugin/Theme Development
-*.zip
-*.tar.gz
+# Environment Files (if any)
+.env
+.env.local
+.env.production
 
-# Security Keys and Salts (if stored separately)
-salt.txt
-keys.txt
-
-# PHPMyAdmin
-phpmyadmin/tmp/
-phpmyadmin/config.inc.php
-
-# WordPress Multisite
-wp-content/blogs.dir/
-
-# WordPress CLI
-wp-cli.yml
-
-# Composer (if using for WordPress)
-vendor/
+# Composer (if using)
+/vendor/
 composer.lock
 
-# WordPress Updates
-wordpress-data/wp-content/upgrade/
-wordpress-data/wp-content/updates/
+# Build Files (if any)
+/build/
+/dist/
 
-# Error logs specifically
-error_log
-debug.log
+# Local Development Scripts (keep these local only)
+# Uncomment if you don't want to share development scripts
+# /scripts/
 
-# Keep important structure files
-!README.md
-!WORDPRESS_SETUP.md
-!docker-compose.wordpress.yml
-!scripts/
-!scripts/*.sh 
+# Production Deployment (keep these in repo for deployment)
+# /production-deploy/
+
+# Custom - Project Specific
+# Keep project documentation and configs
+!/README.md
+!/WORDPRESS_SETUP.md
+!/docker-compose.wordpress.yml 
