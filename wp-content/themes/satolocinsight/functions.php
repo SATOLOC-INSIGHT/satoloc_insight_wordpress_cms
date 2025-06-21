@@ -126,7 +126,8 @@ function satoloc_canonical_redirect() {
         exit;
     }
 }
-add_action('template_redirect', 'satoloc_canonical_redirect');
+// Temporarily disabled to troubleshoot admin access
+// add_action('template_redirect', 'satoloc_canonical_redirect');
 
 /**
  * Add canonical meta tags for SEO
