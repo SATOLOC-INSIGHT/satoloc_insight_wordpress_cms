@@ -1,0 +1,34 @@
+# Robots.txt for SatoLOC Insight CMS
+# This CMS domain should not be indexed by search engines
+# All public content is served from www.satolocinsight.com
+
+User-agent: *
+Disallow: /
+
+# Specifically block common search engine bots
+User-agent: Googlebot
+Disallow: /
+
+User-agent: Bingbot
+Disallow: /
+
+User-agent: Slurp
+Disallow: /
+
+User-agent: DuckDuckBot
+Disallow: /
+
+User-agent: Baiduspider
+Disallow: /
+
+User-agent: YandexBot
+Disallow: /
+
+# Allow access to REST API for frontend application
+User-agent: *
+Allow: /wp-json/
+
+# Allow access to admin areas for authenticated users
+# (This doesn't affect search engines as they can't authenticate)
+Allow: /wp-admin/
+Allow: /wp-login.php 

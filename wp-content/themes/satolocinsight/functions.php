@@ -82,3 +82,86 @@ function allow_cors_for_images($headers) {
 }
 add_filter('wp_headers', 'allow_cors_for_images');
 
+/**
+ * Canonical URL redirects for SEO
+ * Redirects CMS URLs to frontend domain for public content
+ */
+function satoloc_canonical_redirect() {
+    // Only apply to frontend requests (not admin, API, or logged-in users)
+    if (is_admin() || wp_doing_ajax() || is_user_logged_in()) {
+        return;
+    }
+
+    // Skip for REST API requests
+    if (defined('REST_REQUEST') && REST_REQUEST) {
+        return;
+    }
+
+    $frontend_domain = 'https://www.satolocinsight.com';
+    
+    // Handle blog posts
+    if (is_single() && get_post_type() === 'post') {
+        $post_slug = get_post_field('post_name', get_the_ID());
+        $frontend_url = $frontend_domain . '/blog/' . $post_slug;
+        
+        wp_redirect($frontend_url, 301);
+        exit;
+    }
+    
+    // Handle category pages
+    if (is_category()) {
+        wp_redirect($frontend_domain . '/blog', 301);
+        exit;
+    }
+    
+    // Handle tag pages
+    if (is_tag()) {
+        wp_redirect($frontend_domain . '/blog', 301);
+        exit;
+    }
+    
+    // Handle main blog page
+    if (is_home() || is_front_page()) {
+        wp_redirect($frontend_domain . '/blog', 301);
+        exit;
+    }
+}
+add_action('template_redirect', 'satoloc_canonical_redirect');
+
+/**
+ * Add canonical meta tags for SEO
+ */
+function satoloc_add_canonical_meta() {
+    if (is_admin()) {
+        return;
+    }
+    
+    $frontend_domain = 'https://www.satolocinsight.com';
+    $canonical_url = '';
+    
+    if (is_single() && get_post_type() === 'post') {
+        $post_slug = get_post_field('post_name', get_the_ID());
+        $canonical_url = $frontend_domain . '/blog/' . $post_slug;
+    } elseif (is_category() || is_tag() || is_home() || is_front_page()) {
+        $canonical_url = $frontend_domain . '/blog';
+    }
+    
+    if ($canonical_url) {
+        echo '<link rel="canonical" href="' . esc_url($canonical_url) . '" />' . "\n";
+        echo '<meta name="robots" content="noindex, nofollow" />' . "\n";
+    }
+}
+add_action('wp_head', 'satoloc_add_canonical_meta');
+
+/**
+ * Prevent search engines from indexing CMS domain
+ */
+function satoloc_add_noindex_meta() {
+    // Add noindex meta tag to prevent search engine indexing of CMS
+    if (!is_admin() && !wp_doing_ajax()) {
+        echo '<meta name="robots" content="noindex, nofollow, noarchive, nosnippet" />' . "\n";
+        echo '<meta name="googlebot" content="noindex, nofollow, noarchive, nosnippet" />' . "\n";
+    }
+}
+add_action('wp_head', 'satoloc_add_noindex_meta', 1);
+

@@ -14,6 +14,31 @@ RewriteRule . /index.php [L]
 
 # END WordPress
 
+# Redirect public blog posts to frontend domain
+<IfModule mod_rewrite.c>
+    # Only redirect if NOT accessing admin areas, API endpoints, or logged in
+    RewriteCond %{REQUEST_URI} !^/wp-admin/
+    RewriteCond %{REQUEST_URI} !^/wp-login\.php
+    RewriteCond %{REQUEST_URI} !^/wp-json/
+    RewriteCond %{REQUEST_URI} !^/xmlrpc\.php
+    RewriteCond %{HTTP_COOKIE} !wordpress_logged_in
+    
+    # Redirect specific blog posts to frontend (handles your exact case)
+    RewriteRule ^satoloc-insight-scale-content-multilingual-seo-ai/?$ https://www.satolocinsight.com/blog/satoloc-insight-scale-content-multilingual-seo-ai [R=301,L]
+    
+    # Redirect all other blog posts to frontend
+    RewriteRule ^([^/]+)/?$ https://www.satolocinsight.com/blog/$1 [R=301,L]
+    
+    # Redirect category and tag pages to frontend blog
+    RewriteRule ^category/(.*)$ https://www.satolocinsight.com/blog [R=301,L]
+    RewriteRule ^tag/(.*)$ https://www.satolocinsight.com/blog [R=301,L]
+    
+    # Redirect main blog page to frontend (but allow admin access)
+    RewriteCond %{REQUEST_URI} ^/$
+    RewriteCond %{HTTP_COOKIE} !wordpress_logged_in
+    RewriteRule ^$ https://www.satolocinsight.com/blog [R=301,L]
+</IfModule>
+
 # CORS Headers for SatoLOC REST API
 <IfModule mod_headers.c>
     # Dynamic CORS origin handling

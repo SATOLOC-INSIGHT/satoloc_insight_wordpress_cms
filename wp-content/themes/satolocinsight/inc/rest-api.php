@@ -2,12 +2,10 @@
 ini_set('error_reporting', E_STRICT);
 ini_set('memory_limit', -1);
 
-// Import the HCMS_Contents class
 require_once __DIR__ . '/../helpers/contents.php';
 
 function register_routes()
 {
-    //print_r('Registering routes in requiem API');
 
     // Homepage Content API endpoint
     register_rest_route('satoloc/v1', 'homepage-content', array(
@@ -24,7 +22,7 @@ add_action('rest_api_init', 'register_routes');
 
 // Function to get homepage content
 function get_homepage_content($request) {
-    // Get the Homepage page by slug - this is more reliable than hardcoded ID
+    // Get the Homepage page by slug
     $homepage_page = get_page_by_path('homepage');
     
     // Fallback: if not found by slug, try to find by title
